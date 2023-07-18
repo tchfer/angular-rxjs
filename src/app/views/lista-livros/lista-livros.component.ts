@@ -16,10 +16,11 @@ export class ListaLivrosComponent {
   ) { }
 
   buscarLivros() {
-    this.livroService.buscar(this.campoBusca).subscribe(
-      (response) =>  console.log(response),
-      (error) => console.log(error)
-    );
+    this.livroService.buscar(this.campoBusca).subscribe({
+      next:(response) =>  console.log(response),
+      error: (error) => console.error(error),
+      complete: () => console.log('Observable completado') // Não aparece quando tem um erro porque o erro já encerra o ciclo
+    });
   }
 
 
