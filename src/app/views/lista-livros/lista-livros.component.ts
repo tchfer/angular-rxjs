@@ -17,7 +17,7 @@ export class ListaLivrosComponent implements OnDestroy {
     private livroService : LivroService,
   ) { }
 
-  buscarLivros() {
+  public buscarLivros(): void {
     this.subscription = this.livroService.buscar(this.campoBusca).subscribe({
       next:(response) =>  console.log(response),
       error: (error) => console.error(error),
@@ -25,7 +25,7 @@ export class ListaLivrosComponent implements OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
