@@ -40,6 +40,3 @@ export class ListaLivrosComponent implements OnDestroy {
     this.subscription.unsubscribe();
   }
 }
-
-
-
