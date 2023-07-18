@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { map, switchMap, tap } from 'rxjs';
+import { filter, map, switchMap, tap } from 'rxjs';
 
 import { Item } from 'src/app/models/interfaces';
 import { LivroVolumeInfo } from 'src/app/models/livroVolumeInfo';
@@ -22,8 +22,9 @@ export class ListaLivrosComponent {
 
   livrosEncontrados$ = this.campoBusca.valueChanges
     .pipe(
+      filter(valorDigitado => valorDigitado.length >= 3),
       tap(() => console.log('Requisições ao servidor')),
-      switchMap((valorDigitado) => this.livroService.buscar(valorDigitado)),
+      switchMap(valorDigitado => this.livroService.buscar(valorDigitado)),
       tap(() => console.log('Requisições ao servidor após o switchMap')),
       map(items => this.livrosResultadoParaLivros(items))
     )
